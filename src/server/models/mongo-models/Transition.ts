@@ -9,7 +9,7 @@ const Transition = model(
       default: Date.now,
     },
     userId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true,
     },
