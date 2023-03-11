@@ -5,7 +5,7 @@ describe("create-user middleware", () => {
   beforeEach(async () => {
     await User.create({
       name: "test",
-      email: "test@gmail.com",
+      email: "test1@gmail.com",
       password: "123",
     });
   });
@@ -53,7 +53,7 @@ describe("create-user middleware", () => {
   it("should retun status code 400 by email already registered", async () => {
     const { statusCode, body } = await serverTest
       .post("/v1/users")
-      .send({ name: "test", email: "test@gmail.com", password: "123" });
+      .send({ name: "test", email: "test1@gmail.com", password: "123" });
 
     expect(statusCode).toBe(400);
     expect(body).toEqual({ error: "Email already registered" });

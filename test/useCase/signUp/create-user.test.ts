@@ -1,5 +1,5 @@
-import { User } from "../../src/server/models/mongo-models/User";
-import { serverTest } from "../jest.setup";
+import { User } from "../../../src/server/models/mongo-models/User";
+import { serverTest } from "../../jest.setup";
 
 describe("create-user useCase", () => {
   afterEach(async () => {
