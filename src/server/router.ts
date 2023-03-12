@@ -6,6 +6,7 @@ import { createCoversionMiddlware } from "./middlewares/transition/create-covers
 import { loginUserRouter } from "./userCase/signIn/login-user";
 import { createUserRouter } from "./userCase/signUp/create-user";
 import { createConversion } from "./userCase/transition/create-conversion";
+import { getAllConversionRouter } from "./userCase/transition/getAll-conversion";
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.post(
   createCoversionMiddlware,
   createConversion
 );
+router.get("/transition", authentication, getAllConversionRouter);
 
 export { router };
