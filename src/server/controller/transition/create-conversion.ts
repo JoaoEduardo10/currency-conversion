@@ -32,14 +32,14 @@ export class CreateCoversionController implements IController {
 
     return {
       body: {
-        acheat_at,
-        conversionRate,
-        destinationCurrency,
-        destinationValue,
         id,
+        userId,
         origintionCurrency,
         originValue,
-        userId,
+        destinationValue,
+        destinationCurrency,
+        conversionRate,
+        acheat_at,
       },
       statusCode: 201,
     };

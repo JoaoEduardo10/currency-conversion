@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { IsItRecordAndNotAny } from "mongoose";
 import { IRequest } from "../../controller/protocols";
 import { CreateCoversionController } from "../../controller/transition/create-conversion";
 import { ITransition } from "../../models/protocols";
