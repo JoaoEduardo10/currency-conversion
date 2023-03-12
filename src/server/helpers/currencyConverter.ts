@@ -1,4 +1,5 @@
 import { ITransition } from "../models/protocols";
+import fetch, { Headers } from "node-fetch";
 
 export interface IApiResponseConversion {
   info: {
@@ -14,22 +15,18 @@ export interface IApiResponseConversion {
   success: true;
 }
 
-// responsible for making the transition
-
-const currencyConversion = async (
-  transition: Omit<ITransition, "destinationValue">
-) => {
+const currencyConversion = async (transition: Omit<ITransition, "id">) => {
   const chaveKey = process.env.API_KEY as string;
 
   const myHeaders = new Headers();
   myHeaders.append("apikey", chaveKey);
 
   const currencyExchange = await fetch(
-    `https://api.apilayer.com/exchangerates_data/convert?to={${transition.destinationCurrency}}&from={${transition.origintionCurrency}}&amount={${transition.originValue}}`,
+    `https://api.apilayer.com/exchangerates_data/convert?to=${transition.destinationCurrency}&from=${transition.origintionCurrency}&amount=${transition.originValue}`,
     {
-      method: "GET",
+      method: "Get",
       redirect: "follow",
-      headers: myHeaders,
+      headers: myHeaders as Headers,
     }
   );
 
