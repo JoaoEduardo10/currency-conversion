@@ -1,0 +1,147 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de converção de moedas",
+    "deacription": "Essa api Faz a converção de moedas utililizando por base os caracteres de suas respectivas moedas, ex: BRL ou URL",
+    "termsOfService": "Use com moderação",
+    "contact": {
+      "email": "joaoeduardo@gmail.com",
+      "celular": "(86)981320524"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000/v1",
+      "deacription": "Api de produção"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Criação de usuario",
+        "description": "Essa rota será responsavel por criar um usuário",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "name": "João eduardo",
+                "email": "joaoeduardo@gmail.com",
+                "password": "123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "deacription": "Bad_Request"
+          },
+          "500": {
+            "description": "Internal_server_Error"
+          },
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "validação de usuario",
+        "description": "Essa rota será responsavel por fazer o login do usuario",
+        "tags": ["Login"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Login"
+              },
+              "example": {
+                "email": "joaoeduardo@gmail.com",
+                "password": "123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not_Fould"
+          },
+          "400": {
+            "deacription": "Bad_Request"
+          },
+          "500": {
+            "description": "Internal_server_Error"
+          },
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "required": true
+          },
+          "email": {
+            "type": "string",
+            "required": true,
+            "unique": true
+          },
+          "password": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "required": true,
+            "type": "string"
+          },
+          "email": {
+            "required": true,
+            "type": "string",
+            "unique": true
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

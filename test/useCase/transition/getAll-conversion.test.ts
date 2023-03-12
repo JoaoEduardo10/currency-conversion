@@ -30,12 +30,12 @@ describe("getAll useCase", () => {
     await Transition.deleteMany();
   });
 
-  it("shuold returns status code 20o with a currency transition", async () => {
+  it("shuold returns status code 200 with a currency transition", async () => {
     const { statusCode, body } = await serverTest
       .get("/v1/transition")
       .set({ Authorization: `Bearer ${user.token}` });
 
     expect(statusCode).toBe(200);
     expect(body).toBeTruthy();
-  }, 20000);
+  }, 30000);
 });

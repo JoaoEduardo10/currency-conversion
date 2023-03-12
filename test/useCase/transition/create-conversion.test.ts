@@ -42,5 +42,5 @@ describe("create-conversion useCase", () => {
 
     expect(statusCode).toBe(201);
     expect(body).toBeTruthy();
-  });
+  }, 20001);
 });

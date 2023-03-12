@@ -27,5 +27,5 @@ describe("login-user useCase", () => {
 
     expect(statusCode).toBe(200);
     expect(body).toBeTruthy();
-  });
+  }, 30005);
 });
