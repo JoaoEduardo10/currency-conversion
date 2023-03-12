@@ -8,6 +8,10 @@ export interface ICreateConversionParams {
   userId: string;
 }
 
+export interface IGetAllConversionRepository {
+  getAll(userId: string): Promise<TOmitDestinationValue[]>;
+}
+
 export interface ICreateConversionRepository {
   create(params: ICreateConversionParams): Promise<TOmitDestinationValue>;
 }
