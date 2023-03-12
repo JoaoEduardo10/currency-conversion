@@ -20,7 +20,7 @@
     "/users": {
       "post": {
         "summary": "Criação de usuario",
-        "description": "Essa rota será responsavel por criar um usuário",
+        "description": "Essa rota será responsavel por criar um usuário. Para criar um usuario basta clica no botão que contem o nome Try in Out.",
         "tags": ["Users"],
         "requestBody": {
           "content": {
@@ -39,7 +39,7 @@
         },
         "responses": {
           "400": {
-            "deacription": "Bad_Request"
+            "description": "Bad_Request"
           },
           "500": {
             "description": "Internal_server_Error"
@@ -61,7 +61,7 @@
     "/login": {
       "post": {
         "summary": "validação de usuario",
-        "description": "Essa rota será responsavel por fazer o login do usuario",
+        "description": "Essa rota será responsavel por fazer o login do usuario. Para gerar  um token valido basta clica no botão que contem o nome Try in Out.",
         "tags": ["Login"],
         "requestBody": {
           "content": {
@@ -82,7 +82,7 @@
             "description": "Not_Fould"
           },
           "400": {
-            "deacription": "Bad_Request"
+            "description": "Bad_Request"
           },
           "500": {
             "description": "Internal_server_Error"
@@ -94,6 +94,99 @@
                 "schema": {
                   "type": "string"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transition": {
+      "post": {
+        "summary": "Criação de uma transferencia",
+        "description": "Essa rota será responsavel por criar uma tranferencia. Para usala voçê deve estar autenticado com token, não é nada muito complicado: \n 1- Voçê deve criar um usuario \n 2- Fazer o login com esse usuario criado usando email e senha \n 3- Pegar o token gerado e utilizar no icone de Authorize logo a cima. \n E pronto, voçê esta autenticado e ja pode criar a sua trasition. OBS: quando fizer a requizição, por usar api de terceiros, pode demerar um pouco.",
+        "tags": ["Transition"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "originValue": {
+                  "type": "number",
+                  "required": true
+                },
+                "origintionCurrency": {
+                  "type": "string",
+                  "enum": ["EUR"],
+                  "required": true
+                },
+                "destinationCurrency": {
+                  "type": "String",
+                  "enum": ["BRL", "USD", "JPY"]
+                },
+                "type": "object"
+              },
+              "example": {
+                "originValue": 22,
+                "origintionCurrency": "EUR",
+                "destinationCurrency": "BRL"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Bad_Request"
+          },
+          "404": {
+            "description": "Not_Fould"
+          },
+          "500": {
+            "description": "Internal_server_Error"
+          },
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Transition"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Busca todas as transferências feitas por usuarios",
+        "description": "Essa rota será responsavel por buscar todas as tranferencias feitas com base no userId. A unica coisa que você precisa fazer é esta autenticado com um usuario, não é nada muito complicado: \n 1- Voçê deve criar um usuario \n 2- Fazer o login com esse usuario criado usando email e senha \n 3- Pegar o token gerado e utilizar no icone de Authorize logo a cima. \n E pronto, voçê esta autenticado e ja pode buscar as suas trasitions.",
+        "tags": ["Transition"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Bad_Request"
+          },
+          "404": {
+            "description": "Not_Fould"
+          },
+          "500": {
+            "description": "Internal_server_Error"
+          },
+          "200": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": [
+                  {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Transition"
+                  }
+                ]
               }
             }
           }
@@ -132,6 +225,40 @@
             "required": true,
             "type": "string",
             "unique": true
+          }
+        }
+      },
+      "Transition": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "userId": {
+            "type": ["string"]
+          },
+          "origintionCurrency": {
+            "type": "string",
+            "enum": ["EUR"],
+            "required": true
+          },
+          "originValue": {
+            "type": "number",
+            "required": true
+          },
+          "destinationCurrency": {
+            "type": "string",
+            "enum": ["BRL", "USD", "EUR", "JPY"],
+            "required": true
+          },
+          "conversionRate": {
+            "type": "number"
+          },
+          "destinationValue": {
+            "type": "number"
+          },
+          "acheat_at": {
+            "type": "string"
           }
         }
       }

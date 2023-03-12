@@ -7,6 +7,9 @@ MongoDb.connect()
 
     server.listen(PORT, () => console.log(`starting server on port: ${PORT}`));
     console.log("connected to database");
+    console.log(
+      `Enter the documentation: http://localhost:${PORT}/api-currency-conversion/documentation`
+    );
   })
   .catch((error: Error) => {
     console.log(`Error: ${error.message}`);
