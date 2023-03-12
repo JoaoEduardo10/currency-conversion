@@ -29,6 +29,7 @@ export const authentication: RequestHandler<
   const newToken = validateJwt(token) as JwtPayload & IJwt;
 
   req.body.userId = newToken.id as string;
+  req.headers.userId = newToken.id as string;
 
   next();
 };
