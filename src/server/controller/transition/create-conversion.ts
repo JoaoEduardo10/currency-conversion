@@ -10,23 +10,37 @@ export class CreateCoversionController implements IController {
   async handle(
     req: IRequest<Omit<ITransition, "id">>
   ): Promise<IResponse<ITransition>> {
-    const {
-      conversionRate,
-      destinationCurrency,
-      originValue,
-      origintionCurrency,
-    } = req.body!;
+    const { destinationValue } = req.body;
 
     const transition = await this.createCoversionRepository.create({
-      conversionRate,
-      destinationCurrency,
-      origintionCurrency,
-      originValue,
+      conversionRate: req.body.conversionRate,
+      destinationCurrency: req.body.destinationCurrency,
+      origintionCurrency: req.body.origintionCurrency,
+      originValue: req.body.originValue,
       userId: req.body.userId as string,
     });
 
+    const {
+      acheat_at,
+      conversionRate,
+      destinationCurrency,
+      id,
+      originValue,
+      origintionCurrency,
+      userId,
+    } = transition;
+
     return {
-      body: { ...req.body, id: transition.id },
+      body: {
+        acheat_at,
+        conversionRate,
+        destinationCurrency,
+        destinationValue,
+        id,
+        origintionCurrency,
+        originValue,
+        userId,
+      },
       statusCode: 201,
     };
   }

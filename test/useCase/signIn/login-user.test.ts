@@ -7,13 +7,13 @@ const user = {
 
 describe("login-user useCase", () => {
   beforeEach(async () => {
-    const createUser = await User.create({
-      email: "test2@gmail.com",
+    const createUser = await serverTest.post("/v1/users").send({
+      email: "test@gmail.com",
       password: "122",
-      name: "test",
+      name: "test4e",
     });
 
-    user.email = createUser.email;
+    user.email = createUser.body.email;
   });
 
   afterEach(async () => {
@@ -23,7 +23,7 @@ describe("login-user useCase", () => {
   it("should status code 200 with a vaid token", async () => {
     const { body, statusCode } = await serverTest
       .post("/v1/login")
-      .send({ email: user.email, passowrd: "122" });
+      .send({ email: "test@gmail.com", password: "122" });
 
     expect(statusCode).toBe(200);
     expect(body).toBeTruthy();
