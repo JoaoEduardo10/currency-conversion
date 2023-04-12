@@ -21,7 +21,7 @@ OBS: Este Projeto contem variavel de ambiente adicione elas antes de começar o 
 
 ```
 # etapas
-1. npm install ou yarn dev
+1. npm install
 2. npm run dev ou yarn dev
 3. use Ctrl + click no link Enter the documentation no terminal
 ```
