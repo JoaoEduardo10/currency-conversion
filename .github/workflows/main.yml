@@ -14,14 +14,14 @@ jobs:
 
       - name: setup node
       - uses: actions/setup-node@v3
+        with:
+          node-version: 18
         env:
           PORT: 8000
           MONGODB_URL: mongodb+srv://testsinbiose007.8sftj72.mongodb.net
           MONGODB_USER: eduardo
           MONGODB_PASSWORD: root
           HASH_JWT: test
-        with:
-          node-version: 18
 
       - name: build with nodesj
         run: npm run build
