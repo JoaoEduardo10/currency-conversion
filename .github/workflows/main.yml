@@ -24,4 +24,5 @@ jobs:
           HASH_JWT: test
 
       - name: build with nodesj
+        run: npm install
         run: npm run build
